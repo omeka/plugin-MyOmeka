@@ -42,6 +42,7 @@ add_plugin_hook('html_purifier_form_submission', 'my_omeka_xss_filter');
 
 // Add filters.
 add_filter('admin_navigation_main', 'my_omeka_admin_nav');
+add_filter('public_navigation_main','my_omeka_public_nav');
 
 /**
  * Install the plugin.
@@ -347,4 +348,16 @@ function my_omeka_delete_myomeka_taggings($item)
     foreach ($taggings as $tagging) {
         $tagging->delete();
     }
+}
+
+function my_omeka_public_nav($nav){
+  $nav['My Omeka'] = uri(get_option('my_omeka_page_path'));
+  
+  if(!($user= current_user())){
+    $nav['login'] = uri('users/login');
+  }else{
+    $nav['logout'] = uri('users/logout');
+  }
+  
+  return $nav;
 }
