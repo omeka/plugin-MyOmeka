@@ -351,11 +351,12 @@ function my_omeka_delete_myomeka_taggings($item)
 }
 
 function my_omeka_public_nav($nav){
-  $nav['My Omeka'] = uri(get_option('my_omeka_page_path'));
+ 
   
   if(!($user= current_user())){
     $nav['login'] = uri('users/login');
   }else{
+    $nav['My Omeka'] = uri(get_option('my_omeka_page_path'));
     $nav['logout'] = uri('users/logout');
   }
   
