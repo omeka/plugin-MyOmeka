@@ -1,4 +1,8 @@
-<?php head(array('title'=>'Register for ' . html_escape(get_option('my_omeka_page_title')))); ?>
+<?php 
+  if(!preg_match('/login/', uri())){
+    head(array('title'=>'Register for ' . html_escape(get_option('my_omeka_page_title')))); 
+  }
+?>
 <div id="primary">
     
 <div id="myomeka-register">
@@ -64,4 +68,4 @@ if (!$emailSent):
 </div>
 
 </div>
-<?php foot(); ?>
+<?php   if(!preg_match('/login/', uri())){foot(); }?>

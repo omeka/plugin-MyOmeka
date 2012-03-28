@@ -120,6 +120,9 @@ function my_omeka_define_routes($router)
     $routes['myOmekaTagDelete'] = array('tags/delete/:tag_id/:item_id', array('controller'=>'tag', 'action'=>'delete'));
     $routes['myOmekaNoteAction'] = array('note/:action', array('controller'=>'note'));
     
+    //Adding the login and logout routes
+    $routes['myOmekaLogin'] = array(':action/:login',array('controller'=>'my-omeka'));
+    
     foreach ($routes as $routeName => $routeValues) {
         list($routePath, $routeVars) = $routeValues;
         // All of these routes are for the 'my-omeka' module.
@@ -354,7 +357,7 @@ function my_omeka_public_nav($nav){
  
   
   if(!($user= current_user())){
-    $nav['login'] = uri('users/login');
+    $nav[get_option('my_omeka_page_title')] = uri(get_option('my_omeka_page_path').'login');
   }else{
     $nav[get_option('my_omeka_page_title')] = uri(get_option('my_omeka_page_path'));
     $nav['logout'] = uri('users/logout');

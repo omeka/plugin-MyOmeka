@@ -89,7 +89,28 @@ class MyOmeka_MyOmekaController extends Omeka_Controller_Action
         $mail->setSubject("Activate your account with the {$this->view->siteTitle} Archive");
         $mail->send();
 	}
-	
+	public function loginAction(){
+	    $emailSent = false;
+	   // $requireTermsOfService = get_option('my_omeka_terms_of_service');
+	   /*if(!empty($_POST)){
+	    require_once 'Zend/Session.php';
+	    $session = new Zend_Session_Namespace;
+	    
+	    $auth = $this->_auth;
+	    
+	    //$adapter = new Omeka_Auth_Adapter($_POST['username'], $_POST['password']);
+	    
+	   // $token = $auth->authenticate($adapter);
+	    
+	    if($token->isValid()){
+	        $this->_redirect(get_option('my_omeka_page_path').'index.php');
+	    }else{
+	        $this->flash('There was an error logging you in. Please try again, or register a new account');
+	    }
+	   }*/
+	   
+	   //$this->render(get_option('my_omeka_page_path').'dashboard');
+	}
 	public function helpAction()
 	{
 	    
