@@ -357,7 +357,10 @@ function my_omeka_public_nav($nav){
  
   
   if(!($user= current_user())){
-    $nav[get_option('my_omeka_page_title')] = uri(get_option('my_omeka_page_path').'login');
+    $nav[get_option('my_omeka_page_title').' Register here'] = uri(get_option('my_omeka_page_path').'register');
+    $nav['or'];
+    $nav['Login'] = uri('users/login');
+    
   }else{
     $nav[get_option('my_omeka_page_title')] = uri(get_option('my_omeka_page_path'));
     $nav['logout'] = uri('users/logout');
