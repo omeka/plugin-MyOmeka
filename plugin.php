@@ -30,6 +30,7 @@ add_plugin_hook('define_acl', 'my_omeka_setup_acl');
 add_plugin_hook('define_routes', 'my_omeka_define_routes');
 
 add_plugin_hook('public_theme_header', 'my_omeka_css');
+add_plugin_hook('public_theme_header', 'my_omeka_js');
 add_plugin_hook('admin_theme_header', 'my_omeka_css');
 
 add_plugin_hook('item_browse_sql', 'my_omeka_show_only_my_items');
@@ -352,13 +353,14 @@ function my_omeka_delete_myomeka_taggings($item)
         $tagging->delete();
     }
 }
-
+function my_omeka_js($request){
+   queue_js('myomeka');
+}
 function my_omeka_public_nav($nav){
  
   
   if(!($user= current_user())){
-    $nav[get_option('my_omeka_page_title').' Register here'] = uri(get_option('my_omeka_page_path').'register');
-    $nav['or'];
+    $nav[get_option('my_omeka_page_title').', Register here'] = uri(get_option('my_omeka_page_path').'register');
     $nav['Login'] = uri('users/login');
     
   }else{

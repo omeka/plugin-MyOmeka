@@ -90,7 +90,11 @@ class MyOmeka_MyOmekaController extends Omeka_Controller_Action
         $mail->send();
 	}
     public function tagsAction(){
-    
+        $current = Omeka_Context::getInstance()->getCurrentUser();
+        
+        $tags = $this->getTable('Tag')->findBy(array('user'=>$current->id, 'type'=>'MyOmekaTag'));
+        
+        $this->view->assign(compact("tags"));
     }
 	public function helpAction()
 	{
