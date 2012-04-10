@@ -97,7 +97,34 @@ class MyOmeka_MyOmekaController extends Omeka_Controller_Action
         $this->view->assign(compact("tags"));
     }
     
-    public function browseAction(){}
+    public function browseAction(){
+    
+       $request = $this->getRequest();
+       $tags = $request->getPost('tags');
+           $item = $this->getTable('Item')->findBy(array('tags' =>$tags));
+           $this->view->tags = $tags;
+           $this->view->items = $item;       
+            /*$results = $this->_helper->searchItems($tags);
+        
+        /** 
+         * Now process the pagination
+         * 
+         *
+        $paginationUrl = $this->getRequest()->getBaseUrl().get_option('my_omeka_page_title').'browse/';
+
+        //Serve up the pagination
+        $pagination = array('menu'          => null, // This hasn't done anything since $menu was never instantiated in ItemsController::browseAction()
+                            'page'          => $results['page'], 
+                            'per_page'      => $results['per_page'], 
+                            'total_results' => $results['total_results'], 
+                            'link'          => $paginationUrl);
+        
+        Zend_Registry::set('pagination', $pagination);
+        
+        fire_plugin_hook('browse_items', $results['items']);
+        
+        $this->view->assign(array('items'=>$results['items'], 'total_records'=>$results['total_items']));*/
+   }
 	public function helpAction()
 	{
 	    
