@@ -1,5 +1,5 @@
 <?php
-  $title = __('Browse By tags');
+  $title = __(get_option('my_omeka_page_title').' tags');
   head(array('title' => $title, 'bodyid' => get_option('my_omeka_page_title'),'bodyclass'=> 'tags'));
   
 ?>
@@ -7,8 +7,8 @@
     <h1><?php echo $title; ?></h1>
     <ul class="navigation exhibit-tags" id="secondary-nav">
     <?php echo nav(array(
-        __('Browse All') => uri(get_option('my_omeka_page_path')),
-        __('Browse by Tag') => uri(get_option('my_omeka_page_path'))
+        __('Browse All') => uri(get_option('my_omeka_page_path').'browse'),
+        __('Browse by Tag') => uri(get_option('my_omeka_page_path').'tags')
     ));?>  
     </ul>
     

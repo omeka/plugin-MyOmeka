@@ -96,6 +96,8 @@ class MyOmeka_MyOmekaController extends Omeka_Controller_Action
         
         $this->view->assign(compact("tags"));
     }
+    
+    public function browseAction(){}
 	public function helpAction()
 	{
 	    

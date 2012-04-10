@@ -223,7 +223,9 @@ function my_omeka_add_tags($item)
     $tagSelect->where('tg.relation_id = ?', $item->id);
     
     $tags = get_db()->getTable('Tag')->fetchObjects($tagSelect);
-    common("add-tags", compact("item","tags"));
+    common("add-tags",compact("item","tags"));
+    
+   
 }
 
 function my_omeka_items_show_navigation()

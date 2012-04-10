@@ -70,9 +70,7 @@
 	<h2>Your Tags</h2>
 	<?php if (count($tags)): ?>
 	    <ul class="hTagcloud" id="myomeka-tags">
-	        <?php foreach ($tags as $tag): ?>
-	           <li><a href="<?php echo html_escape(uri(array('myTag'=>$tag->id, 'controller'=>'items', 'action'=>'browse'), 'default')); ?>"><?php echo html_escape($tag['name']); ?></a></li>
-	        <?php endforeach; ?>
+	        <?php echo tag_cloud($tags,uri(get_option('my_omeka_page_path').'browse')); ?>
 	    </ul>
 	<?php else: ?>
 	    <p>You have not tagged any items yet.</p>
