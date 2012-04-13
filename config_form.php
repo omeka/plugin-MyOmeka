@@ -14,7 +14,7 @@
 </div>
 
 <div class="field">
-<label for="my_omeka_disclaimer">MyOmeka Disclaimer:</label>
+<label for="my_omeka_disclaimer">MyOmeka Terms of Service:</label>
 <div class="inputs">
 <textarea name="my_omeka_disclaimer" rows="10" cols="60"><?php echo settings('my_omeka_disclaimer'); ?></textarea>
 <p class="explanation">The disclaimer text appears below every public poster created by MyOmeka users.</p>
