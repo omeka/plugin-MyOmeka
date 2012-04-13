@@ -71,4 +71,31 @@ class MyOmekaNoteTable extends Omeka_Db_Table
         $mainSelect = "($notedSelect) UNION DISTINCT ($taggedSelect)";
         return $this->getDb()->getTable('Item')->fetchObjects($mainSelect);
     }
+    public function taggedItems($user_id, $tag){
+    
+           if($userId == null){
+                $user = current_user();
+                $userId = $user->id;
+            }
+            if($tag == null){
+                $tag = $_REQUEST['tags'];
+            }
+        $taggedItems = $this->selectTaggedItems($userId,$tag);
+        return $this->getDb()->getTable('Item')->fetchObjects($taggedItems);
+    }
+    public function selectTaggedItems($userId, $tag){
+
+    
+        $db = $this->getDb();
+        $iTable = $db->getTable('Item');
+        $select = $iTable->getSelect()
+            ->joinInner(array('tg'=>$db->Taggings), 'tg.relation_id = ' . $iTable->getTableAlias() . '.id', array())
+            ->joinInner(array('u'=>$db->User), 'u.entity_id = tg.entity_id', array()) //Ugh, unnecessary.
+            ->joinInner(array('t'=>$db->Tags), 't.id = tg.tag_id',array())
+            ->where('u.id = ?', $userId)
+            ->where('tg.type = "MyomekaTag"')
+            ->where('t.name = ?',$tag);
+                
+         return $select;
+    }
 }

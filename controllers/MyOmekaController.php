@@ -98,7 +98,11 @@ class MyOmeka_MyOmekaController extends Omeka_Controller_Action
         $posters = $this->getTable('MyOmekaPoster')->findByUserId($current->id);
 
         // Get tagged and noted items
-        $items = $this->getTable('MyOmekaNote')->findTaggedAndNotedItemsByUserId($current->id);
+        if($_REQUEST['tags'] == ''){
+          $items = $this->getTable('MyOmekaNote')->findTaggedAndNotedItemsByUserId($current->id);
+        } else {
+          $items = $this->getTable('MyOmekaNote')->taggedItems($current->id,$_REQUEST['tags']);
+        }
 
         // Get tags made by the user viewing the dashboard.
         $tags = $this->getTable('Tag')->findBy(array('user'=>$current->id, 'type'=>'MyOmekaTag'));
