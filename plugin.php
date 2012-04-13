@@ -20,7 +20,7 @@ define('MYOMEKA_TAG_TYPE', 'MyomekaTag');
 // for generating URLs in emails.  Need to refactor helpers to allow access
 // within controllers.
 require_once HELPER_DIR . DIRECTORY_SEPARATOR . 'all.php';
-require_once 'helpers/Myhelperfunctions.php';
+
 // Add plugin hooks.
 add_plugin_hook('install', 'my_omeka_install');
 add_plugin_hook('uninstall', 'my_omeka_uninstall');
@@ -30,7 +30,6 @@ add_plugin_hook('define_acl', 'my_omeka_setup_acl');
 add_plugin_hook('define_routes', 'my_omeka_define_routes');
 
 add_plugin_hook('public_theme_header', 'my_omeka_css');
-add_plugin_hook('public_theme_header', 'my_omeka_js');
 add_plugin_hook('admin_theme_header', 'my_omeka_css');
 
 add_plugin_hook('item_browse_sql', 'my_omeka_show_only_my_items');
@@ -44,7 +43,6 @@ add_plugin_hook('html_purifier_form_submission', 'my_omeka_xss_filter');
 // Add filters.
 add_filter('admin_navigation_main', 'my_omeka_admin_nav');
 add_filter('public_navigation_main','my_omeka_public_nav');
-
 /**
  * Install the plugin.
  */
@@ -120,9 +118,6 @@ function my_omeka_define_routes($router)
     $routes['myOmekaAddTag'] = array('tags/add', array('controller'=>'tag', 'action'=>'add'));
     $routes['myOmekaTagDelete'] = array('tags/delete/:tag_id/:item_id', array('controller'=>'tag', 'action'=>'delete'));
     $routes['myOmekaNoteAction'] = array('note/:action', array('controller'=>'note'));
-    
-    //Adding the login and logout routes
-    $routes['myOmekaLogin'] = array(':action/:login',array('controller'=>'my-omeka'));
     
     foreach ($routes as $routeName => $routeValues) {
         list($routePath, $routeVars) = $routeValues;
@@ -223,11 +218,7 @@ function my_omeka_add_tags($item)
     $tagSelect->where('tg.relation_id = ?', $item->id);
     
     $tags = get_db()->getTable('Tag')->fetchObjects($tagSelect);
-     
-    echo "<h2> My Tags </h2>".my_tag_cloud($tags,uri(get_option('my_omeka_page_path').'browse'));
-    common("add-tags",compact('item',"tags"));
-    
-   
+    common("add-tags", compact("item","tags"));
 }
 
 function my_omeka_items_show_navigation()
@@ -357,20 +348,18 @@ function my_omeka_delete_myomeka_taggings($item)
         $tagging->delete();
     }
 }
-function my_omeka_js($request){
-   queue_js('myomeka');
-}
-function my_omeka_public_nav($nav){
- 
-  
-  if(!($user= current_user())){
-    $nav[get_option('my_omeka_page_title').', Register here'] = uri(get_option('my_omeka_page_path').'register');
-    $nav['Login'] = uri('users/login');
+
+function my_omeka_public_nav($nav)
+{
+    if(!($user = current_user())){
+        $nav[get_option('my_omeka_page_title').' Register'] 
+            = uri(get_option('my_omeka_page_path').'register');
+        $nav['Login'] = uri('users/login');
+    } else {
+        $nav[get_option('my_omeka_page_title')]
+            = uri(get_option('my_omeka_page_path'));
+        $nav['Logout'] = uri('users/logout');
+    }
     
-  }else{
-    $nav[get_option('my_omeka_page_title')] = uri(get_option('my_omeka_page_path'));
-    $nav['logout'] = uri('users/logout');
-  }
-  
-  return $nav;
+    return $nav;
 }

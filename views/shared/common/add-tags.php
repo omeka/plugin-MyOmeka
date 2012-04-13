@@ -4,7 +4,7 @@
         <div id="myomeka-my-tags">
             <ul class="hTagcloud">
             <?php foreach ($tags as $tag): ?>
-            <li><a href="<?php echo html_escape(uri(array('myTag'=>$tag->id, 'controller'=>'items', 'action'=>'browse'), 'default')); ?>"><?php echo html_escape($tag->name);?></a> 
+             <li><a href="<?php echo html_escape(uri(get_option('my_omeka_page_path').'browse?tags='.$tag->name)); ?>"><?php echo html_escape($tag->name);?></a>
             [<a href="<?php echo html_escape(uri(array('tag_id'=>$tag->id, 'item_id'=>$item->id), 'myOmekaTagDelete')); ?>" title="Delete this tag">X</a>]</li>
             <?php endforeach; ?>
             </ul>
