@@ -27,6 +27,6 @@
 
 <input type="checkbox" name="my_omeka_require_terms_of_service" value="checked" <?php $requireTOS = settings('my_omeka_require_terms_of_service');
 if (!empty($requireTOS)) { echo 'checked="checked"'; } ?> />
-<p class="explanation">Check box if you require registrants to agree to the Terms of Service and Privacy Policy.</p>
+<p class="explanation">Check box if you require registrants to agree to the Terms of Service and Privacy Policy. Please install Terms of Service plugin before checking this box.</p>
 </div>
 </div>
