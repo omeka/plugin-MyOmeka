@@ -24,7 +24,10 @@
 					<ul class="myomeka-poster-nav">
 	               		<li><a href="<?php echo html_escape(uri(array('action'=>'edit','id'=>$poster->id), 'myOmekaPosterActionId')); ?>" class="myomeka-edit-poster-link">edit</a> </li>
 	               		<li><a href="<?php echo html_escape(uri(array('action'=>'share','id'=>$poster->id), 'myOmekaPosterActionId')); ?>" class="myomeka-share-poster-link">share</a></li>
-	               		<li><?php echo delete_button(uri(array('action'=>'delete-confirm','id'=>$poster->id), 'myOmekaPosterActionId')); ?></li>
+	               		<li><?php 
+	               		      echo delete_button(uri(array('action'=>'delete-confirm','id'=>$poster->id), 'myOmekaPosterActionId'));
+	               		      //echo delete_button(uri(array('action'=>'delete','id'=>$poster->id),'myOmekaPosterActionId'));
+	               		 ?></li>
 					</ul>
 				</div>
 	      	<?php endforeach; ?>

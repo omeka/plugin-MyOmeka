@@ -10,12 +10,17 @@ class MyOmeka_PosterController extends Omeka_Controller_Action
 {        
     
     const UNTITLED_POSTER_TITLE = 'Untitled';
-    
+
     public function init()
     {
         $this->_currentUser = Omeka_Context::getInstance()->getCurrentUser();
+        
+        if(version_compare(OMEKA_VERSION,'2.0-dev','>=')){
+            $this->_helper->db->setDefaultModelName('MyOmekaPoster');
+        }else {
         $this->_modelClass = 'MyOmekaPoster';
-    }
+        }
+    }  
     
     /**
      * This action should only be available on the admin interface.
@@ -184,11 +189,13 @@ class MyOmeka_PosterController extends Omeka_Controller_Action
     
     public function deleteAction()
     {
-        //clear the new poster id for discard
+    
+        
+       /*//clear the new poster id for discard
         unset($_SESSION['my_omeka_new_poster_id']);
         
-        $poster = $this->findById(null, 'MyOmekaPoster');
-        
+        $poster = $this->findById(null,'MyOmekaPoster');
+        //  $poster $this->_helper->db->findById(,'MyOmekaPoster');
         // Check to make sure the poster belongs to the logged in user
         $this->_verifyAccess($poster, 'delete');
         
@@ -201,7 +208,13 @@ class MyOmeka_PosterController extends Omeka_Controller_Action
             return $this->redirect->gotoUrl($redirectUrl);
         } else {
             return $this->redirect->gotoRoute(array(), 'myOmekaDashboard');
-        }
+        } */
+        //Clear the new Poster Id for Discard
+        unset($_SESSION['my_omeka_new_poster_id']);
+       
+        $poster = $this->findById();
+        
+        return parent::deleteAction();    
     }
 
     public function addPosterItemAction()
