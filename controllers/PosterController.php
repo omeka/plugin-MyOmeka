@@ -46,8 +46,8 @@ class MyOmeka_PosterController extends Omeka_Controller_Action
     public function editAction()
     {           
         // Get the poster object
-        $poster = $this->findById(null, 'MyOmekaPoster');
-        
+        //$poster = $this->findById(null, 'MyOmekaPoster');
+        $poster = $this->findById();
         $this->_verifyAccess($poster, 'edit');
         
         // Retrieve items that were noted and tagged by users
@@ -77,7 +77,8 @@ class MyOmeka_PosterController extends Omeka_Controller_Action
         unset($_SESSION['my_omeka_new_poster_id']);
                 
         // Get the poster object
-        $poster = $this->findById(null, 'MyOmekaPoster');
+        //$poster = $this->findById(null, 'MyOmekaPoster');
+        $poster = $this->findById();
         $this->view->poster = $poster;
     }
     
@@ -94,8 +95,8 @@ class MyOmeka_PosterController extends Omeka_Controller_Action
         unset($_SESSION['my_omeka_new_poster_id']);
                 
         // Get the poster object
-        $poster = $this->findById(null, 'MyOmekaPoster');
-        
+       // $poster = $this->findById(null, 'MyOmekaPoster');
+        $poster = $this->findById();
         if ($this->getRequest()->isPost()) {
             $validator = new Zend_Validate_EmailAddress();
             $emailTo = $this->getRequest()->getPost('email_to');
@@ -132,8 +133,8 @@ class MyOmeka_PosterController extends Omeka_Controller_Action
         unset($_SESSION['my_omeka_new_poster_id']);
                    
         // Get the poster object
-        $poster = $this->findById(null, 'MyOmekaPoster');
-        
+       // $poster = $this->findById(null, 'MyOmekaPoster');
+        $poster = $this->findById();
         $this->_verifyAccess($poster, 'edit');
         
         $params = $this->getRequest()->getParams();
@@ -190,26 +191,6 @@ class MyOmeka_PosterController extends Omeka_Controller_Action
     public function deleteAction()
     {
     
-        
-       /*//clear the new poster id for discard
-        unset($_SESSION['my_omeka_new_poster_id']);
-        
-        $poster = $this->findById(null,'MyOmekaPoster');
-        //  $poster $this->_helper->db->findById(,'MyOmekaPoster');
-        // Check to make sure the poster belongs to the logged in user
-        $this->_verifyAccess($poster, 'delete');
-        
-        $poster->delete();
-        $this->flashSuccess("\"$poster->title\" was successfully deleted.");
-        
-        // Try to redirect to the HTTP Referer, otherwise go back to the dashboard.
-        $redirectUrl = $_SERVER['HTTP_REFERER'];
-        if ($redirectUrl) {
-            return $this->redirect->gotoUrl($redirectUrl);
-        } else {
-            return $this->redirect->gotoRoute(array(), 'myOmekaDashboard');
-        } */
-        //Clear the new Poster Id for Discard
         unset($_SESSION['my_omeka_new_poster_id']);
        
         $poster = $this->findById();
