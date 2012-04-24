@@ -18,7 +18,7 @@
                     <label for="myomeka-title">Title of Poster:</label>
                     <?php echo $this->formText('title', $poster->title, array('id'=>'myomeka-title')); ?>
                 </div>
-
+                 <?php print_r($_POST); ?>
                 <div class="myomeka-field">
                     <label for="myomeka-description">Description:</label>
                     <?php echo $this->formTextarea('description', $poster->description, 
@@ -43,7 +43,7 @@
         
                 <div id="myomeka-poster-additem">
                     <?php if (count($items)): ?>
-                        <button type="button">Add an Item &rarr;</button>
+		            <button type="button">Add an Item &rarr;</button>
                     <?php else: ?>
                         <button type="button" disabled="disabled">Add an item &rarr;</button>
                         <p>You have to add notes or tags to an item before adding them to a poster</p>
@@ -70,7 +70,7 @@
             <!-- Hidden div for modal pop-up -->
             <div id="myomeka-additem-modal">
             <?php if (count($items)):?>
-                <?php while ($item = loop_items()):?>
+                 <?php while ($item = loop_items()):?>
                     <div class="myomeka-additem-item">
                         <div class="myomeka-additem-image">
                             <?php echo my_omeka_poster_icon_html(); ?>
@@ -80,7 +80,7 @@
                                 <dt>Title:</dt>
                                 <dd><?php echo item('Dublin Core', 'Title'); ?></dd>
                                 <dt>Description:</dt>
-                                <dd><?php echo item('Dublin Core', 'Description'); ?></dd>
+                                <dd><?php echo item('Dublin Core', 'Description',array('snippet'=>150)); ?></dd>
                                 <dt>Creator:</dt>
                                 <dd><?php echo item('Dublin Core', 'Creator'); ?></dd>
                                 <?php if ($item->annotation): ?>

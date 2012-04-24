@@ -107,6 +107,7 @@ Add notes to public item page
 Add item to posters model
 */
 .myomeka-additem-item {
+    width: 500px;
     margin:15px;
     padding:15px;
 	overflow:hidden;
@@ -141,4 +142,11 @@ Add item to posters model
     display:none;
     border-style:solid;
     border-width:2px;
+    overflow-y: scroll;
+}
+
+div[style] {
+  width: 572px !important;
+  height: 500px !important;
+
 }
