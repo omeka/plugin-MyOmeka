@@ -18,7 +18,7 @@
                     <label for="myomeka-title">Title of Poster:</label>
                     <?php echo $this->formText('title', $poster->title, array('id'=>'myomeka-title')); ?>
                 </div>
-                 <?php print_r($_POST); ?>
+                 <?php print_r($items->id); ?>
                 <div class="myomeka-field">
                     <label for="myomeka-description">Description:</label>
                     <?php echo $this->formTextarea('description', $poster->description, 
@@ -43,6 +43,7 @@
         
                 <div id="myomeka-poster-additem">
                     <?php if (count($items)): ?>
+                    <?php echo $_REQUEST['item_id']; ?>
 		            <button type="button">Add an Item &rarr;</button>
                     <?php else: ?>
                         <button type="button" disabled="disabled">Add an item &rarr;</button>

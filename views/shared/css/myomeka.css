@@ -146,6 +146,7 @@ Add item to posters model
 }
 
 div[style] {
+  background: white;
   width: 572px !important;
   height: 500px !important;
 

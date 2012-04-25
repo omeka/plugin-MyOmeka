@@ -4,7 +4,7 @@ if (!Omeka) {
 
 Omeka.Poster = {
     itemCount: 0,
-
+    var modalDiv = jQuery('#myomeka-additem-modal');
     //Everything that takes place when the form loads
     init: function () {
         // WYSIWYG Editor
@@ -32,26 +32,28 @@ Omeka.Poster = {
             });
             jQuery('#myomeka-itemCount').val(index - 1);
         });
-
+        // Click handler.
         jQuery('#myomeka-poster-additem button').click(function () {
-            var modalDiv = jQuery('#myomeka-additem-modal');
-            modalDiv.dialog({modal: true});
-            jQuery('.myomeka-additem-form').submit(function (event) {
-                var form = jQuery(this), submitButtons = jQuery('.myomeka-additem-submit');
-                event.preventDefault();
-                submitButtons.attr('disabled', 'disabled');
-                Omeka.Poster.mceExecCommand('mceRemoveControl');
-                jQuery.get(form.attr('action'), form.serialize(), function (data) {
-                    jQuery('#myomeka-poster-canvas').append(data);
-                    Omeka.Poster.hideExtraControls();
-                    Omeka.Poster.mceExecCommand('mceAddControl');
-                    Omeka.Poster.bindControls();
-                    modalDiv.dialog('close');
-                    submitButtons.removeAttr('disabled');
-                });
-                jQuery('#myomeka-poster-no-items-yet').hide();
-            });
+            modalDiv.dialog({modal: true}); 
         });
+        
+        jQuery('.myomeka-additem-form').submit(function (event) {
+        	var form = jQuery(this), submitButtons = jQuery('.myomeka-additem-submit');
+            event.preventDefault();
+            submitButtons.attr('disabled', 'disabled');
+            Omeka.Poster.mceExecCommand('mceRemoveControl');
+            jQuery.get(form.attr('action'), form.serialize(), function (data) {
+                    
+            	jQuery('#myomeka-poster-canvas').append(data);
+            	Omeka.Poster.hideExtraControls();
+            	Omeka.Poster.mceExecCommand('mceAddControl');
+                Omeka.Poster.bindControls();
+	            modalDiv.dialog('close');
+	            submitButtons.removeAttr('disabled');
+            });
+            jQuery('#myomeka-poster-no-items-yet').hide();
+        });
+       
 
         if (Omeka.Poster.itemCount > 0) {
             // When the form loads, hide up and down controls that can't be used
