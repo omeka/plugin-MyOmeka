@@ -7,9 +7,10 @@
 <div id="myomeka-dashboard">
 	<h1><?php echo $pageTitle; ?></h1>
     <?php echo flash(); ?>
-	    
+	    <h2>Your Posters</h2>
+	    <!---------Begining slideshow ---------------->
 	<div id="myomeka-posters">
-		<h2>Your Posters</h2>
+		
 		<?php if (count($posters) > 0): ?>
 
 	        <?php foreach($posters as $poster): ?>           
@@ -36,14 +37,15 @@
 		<?php else: ?>
 			<p>You haven't created any posters yet.</p>
 		<?php endif; ?>
-		
+		</div>
+		<!-----    End of poster slideshow ---->
 		<div id="myomeka-create-poster">
     	    <form action="<?php echo html_escape(uri(array('action'=>'new'), 'myOmekaPosterAction'));?>" method="post">
     	        <input type="submit" name="myomeka_create_poster" value="Create a Poster &rarr;" />
     	    </form>
     	</div>
 		
-	</div>
+	
 
 	<div id="myomeka-noted-items">
 	<h2>Your Items</h2>
