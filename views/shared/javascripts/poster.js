@@ -4,9 +4,11 @@ if (!Omeka) {
 
 Omeka.Poster = {
     itemCount: 0,
-    var modalDiv = jQuery('#myomeka-additem-modal');
+    
     //Everything that takes place when the form loads
     init: function () {
+		var modalDiv = jQuery('#myomeka-additem-modal');
+    
         // WYSIWYG Editor
         tinyMCE.init({
             mode: "textareas",
@@ -32,6 +34,8 @@ Omeka.Poster = {
             });
             jQuery('#myomeka-itemCount').val(index - 1);
         });
+        
+        // var modalDiv = jQuery('#myomeka-additem-modal');
         // Click handler.
         jQuery('#myomeka-poster-additem button').click(function () {
             modalDiv.dialog({modal: true}); 
