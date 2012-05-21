@@ -1,6 +1,7 @@
 <?php
     $pageTitle = 'Edit Poster: &quot;' . html_escape($poster->title) . '&quot;';
     queue_js(array('tiny_mce/tiny_mce', 'poster'));
+    queue_css('jquery-ui');
     head(array('title'=>$pageTitle));
 ?>
 <script type="text/javascript">

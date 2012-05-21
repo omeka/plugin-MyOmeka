@@ -38,7 +38,7 @@ Omeka.Poster = {
         // var modalDiv = jQuery('#myomeka-additem-modal');
         // Click handler.
         jQuery('#myomeka-poster-additem button').click(function () {
-            modalDiv.dialog({modal: true}); 
+            modalDiv.dialog({modal: true, width: "572", height: "500", title: "Add an Item"}); 
         });
         
         jQuery('.myomeka-additem-form').submit(function (event) {
