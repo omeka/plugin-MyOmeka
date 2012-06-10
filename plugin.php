@@ -245,7 +245,7 @@ function my_omeka_user_status()
 {
 	$user = current_user();
 	if ($user) {
-		$html = "<p>logged in as <a href=\"" . html_escape(uri(array(), 'myOmekaDashboard')) . "\">html_escape($user->username)</a> | <a href=\"" . html_escape(uri(array('action'=>'logout', 'controller'=>'users'), 'default')) . "\">Logout</a></p>";
+		$html = "<p>logged in as <a href=\"" . html_escape(uri(array(), 'myOmekaDashboard')) . "\">" . html_escape($user->username) . "</a> | <a href=\"" . html_escape(uri(array('action'=>'logout', 'controller'=>'users'), 'default')) . "\">Logout</a></p>";
 	} else {
 		$html = '<p><a href="' . html_escape(uri(array(), 'myOmekaDashboard')) . '">Login</a> | <a href="' . html_escape(uri(array('action'=>'register'), 'myOmekaAction')) . '">Register</a></p>';
 	}
