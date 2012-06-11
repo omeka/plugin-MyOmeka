@@ -48,7 +48,7 @@ add_filter('public_navigation_main','my_omeka_public_nav');
  */
 function my_omeka_install()
 {
-    set_option('my_omeka_page_path', my_omeka_clean_path(MY_OMEKA_PAGE_PATH));
+    set_option('my_omeka_page_path', MY_OMEKA_PAGE_PATH);
     set_option('my_omeka_page_title', MY_OMEKA_PAGE_TITLE);
     set_option('my_omeka_disclaimer', MY_OMEKA_DISCLAIMER);
 
@@ -92,7 +92,7 @@ function my_omeka_uninstall()
 	$db = get_db();
 	$db->query("DROP TABLE {$db->prefix}posters");
 	$db->query("DROP TABLE {$db->prefix}posters_items");
-	$db->query("DROP TABLE {$db->prefix}notes");	
+    $db->query("DROP TABLE {$db->prefix}notes");
 }
 
 /**
@@ -258,22 +258,18 @@ function my_omeka_user_status()
 	return $html;
 }
 
-function my_omeka_clean_path($path)
-{
-	return rtrim($path, '/ ') . '/';
-}
-
 function my_omeka_config($post) 
 {
-	set_option('my_omeka_page_path', my_omeka_clean_path($post['my_omeka_page_path']));
+    $path = trim(trim($post['my_omeka_page_path']), '/');
+    if (!$path) {
+        $path = MY_OMEKA_PAGE_PATH;
+    } else {
+        $path .= '/';
+    }
+	set_option('my_omeka_page_path', $path);
 	set_option('my_omeka_page_title', $post['my_omeka_page_title']);
 	set_option('my_omeka_disclaimer', $post['my_omeka_disclaimer']);
 	
-	//if the page path is empty then make it the default page path
-	if (trim(get_option('my_omeka_page_path')) == '') {
-		set_option('my_omeka_page_path', my_omeka_clean_path(MY_OMEKA_PAGE_PATH));
-	}
-
 	if(get_option('my_omeka_page_title') == '') {
 		set_option('my_omeka_page_title', MY_OMEKA_PAGE_TITLE);
 	}
